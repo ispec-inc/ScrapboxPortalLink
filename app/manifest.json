@@ -29,18 +29,11 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "css": [
-        "styles/contentscript.css"
-      ],
+      "matches": ["https://scrapbox.io/*"],
       "js": [
-        "scripts/contentscript.js"
+        "scripts/replace_link.js"
       ],
-      "run_at": "document_end",
-      "all_frames": false
+      "run_at": "document_end"
     }
   ],
   "permissions": [
