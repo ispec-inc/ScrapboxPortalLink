@@ -1,7 +1,9 @@
 import * as $ from 'jquery';
+import { ScrapboxRequest } from './request/scrapbox_request';
 
-console.log('hello chrome extension!');
+const scbRequest = new ScrapboxRequest();
 
 $(window).keydown(function(e){
-  console.log('oefofoefoof');
 });
+
+

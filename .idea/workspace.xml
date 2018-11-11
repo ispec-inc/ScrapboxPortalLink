@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e9b5795-07a6-4439-8e62-8679f60db1f5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/scripts/replace_link.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/scripts/model/page.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/scripts/replace_link.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/scripts/replace_link.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,18 +28,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="replace_link.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/scripts/replace_link.ts">
-          <provider selected="true" editor-type-id="text-editor" />
+      <file leaf-file-name="scrapbox_request.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="contentscript.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/scripts/contentscript.ts">
+      <file leaf-file-name="page.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/scripts/model/page.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="replace_link.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/replace_link.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
               <caret line="4" selection-start-line="4" selection-end-line="4" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,6 +75,8 @@
       <list>
         <option value="$PROJECT_DIR$/app/manifest.json" />
         <option value="$PROJECT_DIR$/app/scripts/replace_link.ts" />
+        <option value="$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts" />
+        <option value="$PROJECT_DIR$/app/scripts/model/page.ts" />
       </list>
     </option>
   </component>
@@ -142,6 +156,20 @@
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="ScrapboxDVL" type="cbb8eebc:String" user="ScrapboxDVL" />
               <item name="app" type="cbb8eebc:String" user="app" />
+              <item name="scripts" type="cbb8eebc:String" user="scripts" />
+              <item name="model" type="cbb8eebc:String" user="model" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="ScrapboxDVL" type="cbb8eebc:String" user="ScrapboxDVL" />
+              <item name="app" type="cbb8eebc:String" user="app" />
+              <item name="scripts" type="cbb8eebc:String" user="scripts" />
+              <item name="request" type="cbb8eebc:String" user="request" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="ScrapboxDVL" type="cbb8eebc:String" user="ScrapboxDVL" />
+              <item name="app" type="cbb8eebc:String" user="app" />
               <item name="styles" type="cbb8eebc:String" user="styles" />
             </path>
             <path>
@@ -208,12 +236,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1541943771915</updated>
-      <workItem from="1541943773497" duration="4025000" />
+      <workItem from="1541943773497" duration="5747000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4025000" />
+    <option name="totallyTimeSpent" value="5747000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="93" y="23" width="1347" height="877" extended-state="0" />
@@ -229,10 +257,10 @@
       <window_info anchor="bottom" id="TypeScript" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26726058" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.0" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -261,16 +289,6 @@
     <entry file="file://$PROJECT_DIR$/gulpfile.babel.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/contentscript.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -278,8 +296,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/contentscript.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/replace_link.ts">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/model/page.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
