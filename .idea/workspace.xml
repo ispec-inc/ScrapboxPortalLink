@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e9b5795-07a6-4439-8e62-8679f60db1f5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/scripts/model/page.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/scripts/model/page_list.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/scripts/replace_link.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/scripts/replace_link.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts" afterDir="false" />
@@ -28,20 +28,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scrapbox_request.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="scrapbox_request.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="240">
+              <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="page.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="page_list.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/model/page_list.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="page.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/model/page.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -50,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/app/scripts/replace_link.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+              <caret line="4" column="34" lean-forward="true" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -74,9 +86,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/manifest.json" />
-        <option value="$PROJECT_DIR$/app/scripts/replace_link.ts" />
-        <option value="$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts" />
         <option value="$PROJECT_DIR$/app/scripts/model/page.ts" />
+        <option value="$PROJECT_DIR$/app/scripts/replace_link.ts" />
+        <option value="$PROJECT_DIR$/app/scripts/model/page_list.ts" />
+        <option value="$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts" />
       </list>
     </option>
   </component>
@@ -102,10 +115,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="93" />
-    <option name="y" value="23" />
-    <option name="width" value="1347" />
-    <option name="height" value="877" />
+    <option name="x" value="-1463" />
+    <option name="y" value="-949" />
+    <option name="width" value="1355" />
+    <option name="height" value="927" />
   </component>
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Project Files" proportions="" version="1">
@@ -236,15 +249,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1541943771915</updated>
-      <workItem from="1541943773497" duration="5747000" />
+      <workItem from="1541943773497" duration="7593000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5747000" />
+    <option name="totallyTimeSpent" value="7593000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="93" y="23" width="1347" height="877" extended-state="0" />
+    <frame x="-1463" y="-949" width="1355" height="927" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -255,7 +268,7 @@
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Gulp" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26726058" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26568267" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.0" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -289,13 +302,6 @@
     <entry file="file://$PROJECT_DIR$/gulpfile.babel.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="3" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/contentscript.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -306,27 +312,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/manifest.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="3" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/replace_link.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <caret line="4" column="34" lean-forward="true" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/model/page.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/model/page_list.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/request/scrapbox_request.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
