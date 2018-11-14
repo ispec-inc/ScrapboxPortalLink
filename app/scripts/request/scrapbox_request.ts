@@ -4,23 +4,24 @@ import {PageList} from '../model/page_list';
 
 export class ScrapboxRequest {
 
-  static scrapboxBaseUrl: string = '';
+  static scrapboxBaseUrl: string = 'https://scrapbox.io/';
 
   projectName: string;
   pageList: PageList = new PageList();
 
-  constructor() {
+  constructor(callBack: () => void) {
     this.projectName = 'help-jp';
 
     const self = this;
     $.getJSON(`https://scrapbox.io/api/pages/${this.projectName}`, function (json) {
       self.pageList = new PageList(json);
+      callBack();
     });
   }
 
   public pageUrl(title: string): string | null {
     if (this.pageList.hasPage(title)) {
-      return this.projectName + title;
+      return `${ScrapboxRequest.scrapboxBaseUrl}${this.projectName}/${title}`;
     }
 
     return null;
