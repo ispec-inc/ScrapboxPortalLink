@@ -11,8 +11,10 @@ export class ScrapboxRequest {
 
   constructor() {
     this.projectName = 'help-jp';
+
+    const self = this;
     $.getJSON(`https://scrapbox.io/api/pages/${this.projectName}`, function (json) {
-      this.pageList = $.extend(new PageList(), json);
+      self.pageList = new PageList(json);
     });
   }
 

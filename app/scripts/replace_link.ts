@@ -7,7 +7,9 @@ $(window).keydown(function(e) {
   const emptyPageElements = findEmptyPageLink();
 
   emptyPageElements.forEach(element => {
-    console.log(element.innerText);
+    const pageTitle = element.innerText;
+    const pageLink = scbRequest.pageUrl(pageTitle);
+    console.log(pageLink);
   });
 });
 
