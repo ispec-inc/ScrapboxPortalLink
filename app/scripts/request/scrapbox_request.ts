@@ -4,12 +4,11 @@ import {PageList} from '../model/page_list';
 
 export class ScrapboxRequest {
 
-  PageList: PageList = new PageList();
+  pageList: PageList = new PageList();
 
   constructor() {
     $.getJSON('https://scrapbox.io/api/pages/help-jp', function (json) {
-      let pageList = $.extend(new PageList(), json);
-      this.pageList = pageList;
+      this.pageList = $.extend(new PageList(), json);
     });
   }
 }
