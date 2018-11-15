@@ -1,4 +1,14 @@
 // Enable chromereload by uncommenting this line:
 // import 'chromereload/devonly'
 
-console.log(`'Allo 'Allo! Options`);
+let registeredProjectNames: string[] = [];
+
+$(window).on('load', function() {
+  chrome.storage.sync.get({
+    
+  });
+});
+
+function registerProject() {
+
+}

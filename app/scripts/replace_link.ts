@@ -6,12 +6,10 @@ let scbRequest = new ScrapboxRequest(function () {});
 $(window).on('load', function() {
   setTimeout(function () {
     scbRequest = new ScrapboxRequest(function () {
-      console.log('first!');
       replaceEmptyLinkIfEnabled();
     });
   }, 1000);
 });
-
 
 $(window).keydown(function(e) {
   replaceEmptyLinkIfEnabled();
@@ -19,8 +17,6 @@ $(window).keydown(function(e) {
 
 function replaceEmptyLinkIfEnabled(): void {
   const emptyPageElements = findEmptyPageLink();
-
-  console.log(emptyPageElements);
 
   emptyPageElements.forEach(element => {
     const pageTitle = element.innerText;

@@ -38,6 +38,7 @@
     }
   ],
   "permissions": [
+    "storage",
     "tabs",
     "<all_urls>"
   ]
