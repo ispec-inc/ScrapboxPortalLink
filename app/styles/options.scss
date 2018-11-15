@@ -1,3 +1,31 @@
 .registered-projects {
-  padding-left: 20px;
+  padding-left: 0;
+
+  .registered-project {
+    list-style: none;
+    font-size: 1.5em;
+
+    i {
+      padding-right: 0.2em;
+    }
+
+    i:hover {
+      opacity: 0.5;
+      cursor: pointer;
+    }
+  }
 }
+
+.project-register-container {
+  display: flex;
+}
+
+#project-name-input {
+  flex: 1;
+  margin-right: 5px;
+}
+
+button {
+  background-image: none!important;
+}
+

@@ -16,28 +16,49 @@ const reloadRegiserProjectName = function() {
     if (projectNames) {
       currentProjectNames = projectNames;
       projectNames.forEach(projectName => {
-        $('.registered-projects').append(`<li class="registered-project">${projectName}</li>`);
+        $('.registered-projects')
+          .append(`<li class="registered-project"><i class="far fa-times-circle project-remove-button"></i>${projectName}</li>`);
+      });
+
+      $('.project-remove-button').click(function (event) {
+        const projectNameLIElement = $(event.target).parent();
+        removeProject(projectNameLIElement.text());
       });
     }
   });
 };
 
-const registerProject = function (inputElementId: string) {
+const registerProjectName = function (inputElementId: string) {
   const nameInput = $(`#${inputElementId}`);
   const name = nameInput.val();
+  nameInput.val('');
 
   if (typeof name === 'string') {
     currentProjectNames.push(name);
-    SBProjectNameStorageManager.setProjectNames(currentProjectNames, function () {
-      reloadRegiserProjectName();
-    });
+    setProjectNamesAndReload();
   }
-
-  nameInput.val('');
 };
+
+const removeProject = function(name: string) {
+  currentProjectNames = currentProjectNames.filter(oldName => oldName !== name);
+  setProjectNamesAndReload();
+};
+
+const setProjectNamesAndReload = function(): void {
+  SBProjectNameStorageManager.setProjectNames(currentProjectNames, function () {
+    reloadRegiserProjectName();
+  });
+};
+
 
 
 // Actions
 $('#project-register-button').click(function () {
-  registerProject('projectNameInput');
+  registerProjectName('project-name-input');
+});
+
+$('#project-name-input').keypress(function (e) {
+  if (e.which === 13) {
+    registerProjectName('project-name-input');
+  }
 });
