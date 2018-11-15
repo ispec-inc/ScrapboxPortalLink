@@ -9,8 +9,8 @@ export class ScrapboxRequest {
   projectName: string;
   pageList: PageList = new PageList();
 
-  constructor(callBack: () => void) {
-    this.projectName = 'help-jp';
+  constructor(projectName: string, callBack: () => void) {
+    this.projectName = projectName;
 
     const self = this;
     $.getJSON(`https://scrapbox.io/api/pages/${this.projectName}`, function (json) {

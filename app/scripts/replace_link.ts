@@ -1,35 +1,55 @@
 import * as $ from 'jquery';
 import { ScrapboxRequest } from './request/scrapbox_request';
+import {SBProjectNameStorageManager} from './manager/SBProjectNameStrageManager';
 
-let scbRequest = new ScrapboxRequest(function () {});
+const sbRequests: ScrapboxRequest[] = [];
 
 $(window).on('load', function() {
-  setTimeout(function () {
-    scbRequest = new ScrapboxRequest(function () {
-      replaceEmptyLinkIfEnabled();
+
+  SBProjectNameStorageManager.getProjectNames(function (projectNames: string[]) {
+    projectNames.forEach(function (name: string) {
+      const scbRequest = new ScrapboxRequest(name, function () {
+        replaceEmptyLinkIfEnabled();
+      });
+
+      sbRequests.push(scbRequest);
     });
-  }, 1000);
+  });
+
+  // linesが変更された時にリンクを更新する
+  $('#app-container').on('DOMSubtreeModified propertychange', function(e) {
+    console.log(e.target.className);
+
+    if (e.target.className === 'lines') {
+      replaceEmptyLinkIfEnabled();
+    }
+  });
 });
 
-$(window).keydown(function(e) {
-  replaceEmptyLinkIfEnabled();
-});
-
-function replaceEmptyLinkIfEnabled(): void {
+const replaceEmptyLinkIfEnabled = function(): void {
   const emptyPageElements = findEmptyPageLink();
 
   emptyPageElements.forEach(element => {
     const pageTitle = element.innerText;
-    const pageLink = scbRequest.pageUrl(pageTitle);
 
-    if (pageLink) {
-      element.setAttribute('href', pageLink);
-      element.classList.add('portal-page-link');
+    for (const sbRequest of sbRequests) {
+      const pageLink = sbRequest.pageUrl(pageTitle);
+
+      if (pageLink) {
+        element.setAttribute('href', pageLink);
+        element.classList.add('portal-page-link');
+        break;
+      }
     }
   });
-}
+};
 
-function findEmptyPageLink(): HTMLElement[] {
+const findEmptyPageLink = function(): HTMLElement[] {
   return $('.empty-page-link').get();
-}
+};
+
+// actions
+$(window).keydown(function(e) {
+  replaceEmptyLinkIfEnabled();
+});
 
