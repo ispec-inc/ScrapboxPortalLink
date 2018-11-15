@@ -18,8 +18,6 @@ $(window).on('load', function() {
 
   // linesが変更された時にリンクを更新する
   $('#app-container').on('DOMSubtreeModified propertychange', function(e) {
-    console.log(e.target.className);
-
     if (e.target.className === 'lines') {
       replaceEmptyLinkIfEnabled();
     }
