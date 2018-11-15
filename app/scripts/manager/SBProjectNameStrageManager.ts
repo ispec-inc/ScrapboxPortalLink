@@ -6,11 +6,11 @@ export class SBProjectNameStorageManager {
       'projectNames',
       function (item) {
         callback(item.projectNames);
-      };
+      });
   }
 
-  public static setProjectNames(name: string, callback: () => void) {
-    chrome.storage.sync.set({'projectNames': name}, function () {
+  public static setProjectNames(names: string[], callback: () => void) {
+    chrome.storage.sync.set({'projectNames': names}, function () {
       callback();
     });
   }
