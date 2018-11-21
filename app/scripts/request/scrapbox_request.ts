@@ -13,7 +13,7 @@ export class ScrapboxRequest {
     this.projectName = projectName;
 
     const self = this;
-    $.getJSON(`https://scrapbox.io/api/pages/${this.projectName}`, function (json) {
+    $.getJSON(`https://scrapbox.io/api/pages/${this.projectName}?limit=500`, function (json) {
       self.pageList = new PageList(json);
       callBack();
     });
