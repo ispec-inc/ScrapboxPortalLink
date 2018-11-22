@@ -28,14 +28,6 @@ export class ScrapboxRequest {
   }
 
   public likePage(title: string): string[] {
-    let pageNames: string[] = [];
-
-    this.pageList.pages.forEach(page => {
-      if (page.title.indexOf(title)) {
-        pageNames.push(page.title);
-      }
-    });
-
-    return pageNames;
+    return this.pageList.likePage(title);
   }
 }

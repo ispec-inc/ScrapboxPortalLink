@@ -27,8 +27,8 @@ export class PageList {
     let pageNames: string[] = [];
 
     this.pages.forEach(page => {
-      if (page.title.indexOf(title) !== -1) {
-        pageNames.push(title);
+      if (new RegExp(title).test(page.title)) {
+        pageNames.push(page.title);
       }
     });
 

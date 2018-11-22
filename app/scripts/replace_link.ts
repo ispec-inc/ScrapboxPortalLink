@@ -47,10 +47,12 @@ const replaceEmptyLinkIfEnabled = function(): void {
       pageTitle = validateTitle[1];
     }
 
-    console.log('hogehoge', pageTitle);
+    let candidatePageNames: string[] = [];
 
     for (const sbRequest of sbRequests) {
-      // console.log(pageTitle, '候補', sbRequest.likePage(pageTitle));
+      if (isEditing) {
+        candidatePageNames = candidatePageNames.concat(sbRequest.likePage(pageTitle));
+      }
 
       const pageLink = sbRequest.pageUrl(pageTitle);
 
@@ -60,6 +62,17 @@ const replaceEmptyLinkIfEnabled = function(): void {
         break;
       }
     }
+
+    candidatePageNames.forEach(pageName => {
+      const currentCandidates = $('.button-container').children('div');
+      for (let i = 0; i < currentCandidates.length; i++) {
+        if (currentCandidates.get(i).innerText === pageName) {
+          return;
+        }
+      }
+
+      $('.button-container').append(`<div class="button">${pageName}</div>`);
+    });
   });
 };
 
