@@ -23,4 +23,16 @@ export class PageList {
     return false;
   }
 
+  public likePage(title: string): string[] {
+    let pageNames: string[] = [];
+
+    this.pages.forEach(page => {
+      if (page.title.indexOf(title) !== -1) {
+        pageNames.push(title);
+      }
+    });
+
+    return pageNames;
+  }
+
 }
