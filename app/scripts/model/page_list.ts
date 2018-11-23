@@ -27,7 +27,7 @@ export class PageList {
     let pageNames: string[] = [];
 
     this.pages.forEach(page => {
-      if (new RegExp(title).test(page.title)) {
+      if (new RegExp(title, 'i').test(page.title)) {
         pageNames.push(page.title);
       }
     });

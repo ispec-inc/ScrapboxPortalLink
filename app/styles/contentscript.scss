@@ -5,3 +5,23 @@
 .line .text a.portal-page-link:hover {
   color: #92D2AB;
 }
+
+.portal-button-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 50vw;
+  border-radius: 7px;
+  background-color: #111;
+  //user-select: none;
+  font-family: "Open Sans",Helvetica,Arial,"Hiragino Sans",sans-serif;
+}
+
+.portal-page-button {
+  font-size: 11px;
+  color: #eee;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 5px;
+  max-height: 23px;
+  border-left: 1px #FFF solid;
+}
