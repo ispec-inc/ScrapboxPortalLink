@@ -37,6 +37,7 @@ export class RelatedPages {
   links2hop: Link[];
 
   constructor(data: any) {
-
+    this.links1hop = 'links1hop' in data ? data.links1hop : [];
+    this.links2hop = 'links2hop' in data ? data.links2hop : [];
   }
 }

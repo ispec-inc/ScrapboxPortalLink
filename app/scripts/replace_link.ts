@@ -13,6 +13,10 @@ $(window).on('load', function() {
     if (e.target.className === 'lines') {
       replaceEmptyLinkIfEnabled();
     }
+
+    if (e.target.className === 'grid') {
+      appendLinkIfNeeded(e.target);
+    }
   });
 });
 
@@ -102,17 +106,26 @@ const fetchCandidatePopup = function (candidatePageNames: string[], targetEmptyL
 
     $('.portal-button-container').append(`<div class="portal-page-button">${pageName}</div>`);
   });
-
-  // 補完機能で入力させる部分 (純正のDOMに弾かれておそらくこの方法だと不可能)
-  // lineを丸ごと複製とかもやってみたらできるかも(わからん)
-  // $('.portal-page-button').mousedown( e => {
-  //   console.log('click!!!!!!!', e.target.innerText);
-  //   $(targetEmptyLinkElement).html(
-  //     `<span class="c1">A</span>`
-  //   );
-  // });
 };
 
 const removeCandidatePopup = function() {
   $('.portal-popup-menu').remove();
+};
+
+const appendLinkIfNeeded = function (gridElement: HTMLElement) {
+  const relationLabels = $(gridElement).children('.relation-label');
+
+  let linkNames: string[] = [];
+  for (let i = 0; i < relationLabels.length; i++) {
+    const linkName = $(relationLabels[i]).find('.title').first().text();
+    if (linkName !== 'New Links') {
+      linkNames.push(linkName);
+    }
+  }
+
+  sbRequests.forEach(request => {
+    request.requestRelatedPages(linkNames[0]).subscribe(links => {
+      console.log('links', links);
+    });
+  });
 };
