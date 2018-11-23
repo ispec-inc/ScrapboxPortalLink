@@ -21,7 +21,6 @@ $(window).keyup(function (e) {
 });
 
 $(document).mousedown(e => {
-  console.log('sakuo');
   removeCandidatePopup();
 });
 

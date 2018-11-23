@@ -35,4 +35,8 @@ export class PageList {
     return pageNames;
   }
 
+  public relationPages(link: string) {
+    this.pages.forEach(page => {
+    });
+  }
 }
