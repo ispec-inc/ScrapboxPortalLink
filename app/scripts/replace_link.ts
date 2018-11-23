@@ -20,6 +20,11 @@ $(window).keyup(function (e) {
   replaceEmptyLinkIfEnabled();
 });
 
+$(document).mousedown(e => {
+  console.log('sakuo');
+  removeCandidatePopup();
+});
+
 const requestSBPageBySavedProjects = function () {
 
   SBProjectNameStorageManager.getProjectNames(function (projectNames: string[]) {
@@ -80,7 +85,7 @@ const fetchCandidatePopup = function (candidatePageNames: string[], targetEmptyL
 
   const buttonContainer = $('.portal-button-container');
 
-  // まだ生成されていなかったら、補完用のpopupを生成する
+  // 生成されていなかったら、補完用のpopupを生成する
   if (buttonContainer.length === 0) {
     const popUpElement = '<div class="portal-popup-menu"><div class="portal-button-container"></div></div>';
     $('.cursor').append(popUpElement);
@@ -99,11 +104,16 @@ const fetchCandidatePopup = function (candidatePageNames: string[], targetEmptyL
     $('.portal-button-container').append(`<div class="portal-page-button">${pageName}</div>`);
   });
 
-  $('.portal-page-button').mousedown( e => {
-    console.log('click!!!!!!!', e.target.innerText);
-    $(targetEmptyLinkElement).html(
-      `<span class="c1">A</span>`
-    );
-    console.log(targetEmptyLinkElement);
-  });
+  // 補完機能で入力させる部分 (純正のDOMに弾かれておそらくこの方法だと不可能)
+  // lineを丸ごと複製とかもやってみたらできるかも(わからん)
+  // $('.portal-page-button').mousedown( e => {
+  //   console.log('click!!!!!!!', e.target.innerText);
+  //   $(targetEmptyLinkElement).html(
+  //     `<span class="c1">A</span>`
+  //   );
+  // });
+};
+
+const removeCandidatePopup = function() {
+  $('.portal-popup-menu').remove();
 };
