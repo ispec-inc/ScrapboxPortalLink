@@ -1,4 +1,6 @@
-# ScrapboxDVL
+[\[日本語版\]](README_jp.md)
+
+# ScrapboxPortalLink
 
 Make the Scrapbox link appear to be valid for multiple projects.
 
