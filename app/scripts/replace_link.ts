@@ -4,7 +4,7 @@ import {SBProjectNameStorageManager} from './manager/SBProjectNameStrageManager'
 import {Observable, zip} from 'rxjs';
 import {Link} from './model/link';
 import {Subject} from 'rxjs/internal/Subject';
-import {distinctUntilChanged, throttle, throttleTime} from 'rxjs/operators';
+import {distinctUntilChanged, skip, take, throttle, throttleTime} from 'rxjs/operators';
 
 /**
  * グローバル変数定義
@@ -45,6 +45,7 @@ $(window).on('load', function() {
     .subscribe(pageLinks => {
       appendLinkIfNeeded(pageLinks);
     });
+
 });
 
 $(window).keyup(function (e) {
@@ -62,6 +63,15 @@ $(document).mousedown(e => {
 /**
  * 関数
  */
+const updatePortalLinksIfReactDrawDone = function() {
+  if ($('.lines').children().length === 0) {
+    setTimeout(function () {
+      updatePortalLinksIfReactDrawDone();
+    }, 1000);
+  } else {
+    updatePortalLinks();
+  }
+};
 
 const updatePortalLinks = function() {
   replaceEmptyLinkIfEnabled();
@@ -69,6 +79,8 @@ const updatePortalLinks = function() {
 };
 
 const requestSBPageBySavedProjects = function () {
+
+  const completeReqSubject: Subject<void> = new Subject<void>();
 
   SBProjectNameStorageManager.getProjectNames(function (projectNames: string[]) {
 
@@ -82,16 +94,17 @@ const requestSBPageBySavedProjects = function () {
 
     for (let i = 0; i < projectNames.length; i++) {
       const scbRequest = new ScrapboxRequest(projectNames[i], function () {
-        // replaceEmptyLinkIfEnabled();
-
-        if (i === projectNames.length - 1) {
-          console.log('ogefefefe');
-          updatePortalLinks();
-        }
+        completeReqSubject.next();
       });
 
       sbRequests.push(scbRequest);
     }
+
+    completeReqSubject
+      .pipe(skip(projectNames.length - 1))
+      .subscribe(function () {
+        updatePortalLinksIfReactDrawDone();
+      });
 
   });
 };
