@@ -52,7 +52,13 @@ $(window).on('load', function() {
 });
 
 $(window).keyup(function (e) {
-  // console.log(e.keyCode);
+  console.log(e.keyCode);
+  if (e.keyCode === 49) {
+    console.log('さくじょ０', $('.portal-link-item'));
+    $('.portal-link-item').remove();
+  }
+
+
   replaceEmptyLinkIfEnabled();
 });
 
@@ -169,17 +175,6 @@ const setLinkPageSubject = function(gridElement: HTMLElement) {
 const appendLinkIfNeeded = function (linkElements: LinkElement[]) {
   $('.portal-link-item').remove();
 
-  // const newTag = `
-  //   <li class="page-list-item grid-style-item .portal-link-item">
-  //     <a href="/murawaki/e3%82%af" rel="route">
-  //     <div class="hover"></div>
-  //     <div class="content">
-  //       <div class="header"><div class="title">あsんぷさsふぇっじゃpすおふぉあットワーク</div></div>
-  //       <div class="description">
-  //       <p>コンセプト</p>
-  //       <p>本質的なものに、もっと本質的な価値を。</p>
-  //       </div></div></a></li>`;
-
   linkElements.forEach(linkElement => {
     if (linkElement.name === 'Links') { return; }
 
@@ -201,7 +196,7 @@ const appendLinkIfNeeded = function (linkElements: LinkElement[]) {
 
 const generatePageListItem = function (link: Link, projectName: string): string {
   let pageListItem = `
-    <li class="page-list-item grid-style-item .portal-link-item">
+    <li class="page-list-item grid-style-item portal-link-item">
       <a href="/${projectName}/${link.title}" rel="route">
       <div class="hover"></div>
       <div class="content">
