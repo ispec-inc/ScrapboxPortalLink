@@ -4,7 +4,7 @@ import {SBProjectNameStorageManager} from './manager/SBProjectNameStrageManager'
 import {Observable, zip} from 'rxjs';
 import {Link} from './model/link';
 import {Subject} from 'rxjs/internal/Subject';
-import {distinctUntilChanged} from 'rxjs/operators';
+import {distinctUntilChanged, throttle, throttleTime} from 'rxjs/operators';
 
 /**
  * グローバル変数定義
@@ -45,26 +45,20 @@ $(window).on('load', function() {
 
   pageLinkSubject
     .pipe(distinctUntilChanged((prev, current) => prev.length === current.length))
+    .pipe(throttleTime(5000))
     .subscribe(pageLinks => {
-    console.log('りんくへんこうされたー', pageLinks.length);
-  });
+      appendLinkIfNeeded(pageLinks);
+    });
 });
 
 $(window).keyup(function (e) {
-  console.log(e.keyCode);
-
-  if (e.keyCode === 49) {
-    console.log($('.grid'));
-    appendLinkIfNeeded($('.grid')[1]);
-  }
-
+  // console.log(e.keyCode);
   replaceEmptyLinkIfEnabled();
 });
 
 $(document).mousedown(e => {
   removeCandidatePopup();
 });
-
 
 
 
@@ -172,42 +166,65 @@ const setLinkPageSubject = function(gridElement: HTMLElement) {
   pageLinkSubject.next(linkElements);
 };
 
-const appendLinkIfNeeded = function (gridElement: HTMLElement) {
-  const relationLabels = $(gridElement).children('.relation-label');
+const appendLinkIfNeeded = function (linkElements: LinkElement[]) {
+  $('.portal-link-item').remove();
 
-  const newTag = `
-    <li class="page-list-item grid-style-item">
-      <a href="/murawaki/E3%82%AF" rel="route">
-      <div class="hover"></div>
-      <div class="content">
-        <div class="header"><div class="title">情報と価値の非中央集権ネットワーク</div></div>
-        <div class="description">
-        <p>コンセプト</p>
-        <p>本質的なものに、もっと本質的な価値を。</p>
-        </div></div></a></li>`;
-  //
-  const relationLabelElement = relationLabels[0];
-  $(relationLabelElement).parent().append(newTag);
+  // const newTag = `
+  //   <li class="page-list-item grid-style-item .portal-link-item">
+  //     <a href="/murawaki/e3%82%af" rel="route">
+  //     <div class="hover"></div>
+  //     <div class="content">
+  //       <div class="header"><div class="title">あsんぷさsふぇっじゃpすおふぉあットワーク</div></div>
+  //       <div class="description">
+  //       <p>コンセプト</p>
+  //       <p>本質的なものに、もっと本質的な価値を。</p>
+  //       </div></div></a></li>`;
 
-  let linkNames: string[] = [];
-  for (let i = 0; i < relationLabels.length; i++) {
-    const relationLabelElement = relationLabels[i];
-    const linkName = $(relationLabels[i]).find('.title').first().text();
-    if (linkName !== 'New Links') {
-      linkNames.push(linkName);
-    }
-  }
+  linkElements.forEach(linkElement => {
+    if (linkElement.name === 'Links') { return; }
 
-  const linkReqObservers: Observable<Link[]>[] = sbRequests.map(request => {
-    return request.requestRelatedPages(linkNames[0]);
-  });
+    sbRequests.forEach(req => {
+      if (req.projectName === getCurrentProjectName()) { return; }
 
-  linkReqObservers.forEach(observable => {
-    observable.subscribe((links: Link[]) => {
-      for (let i = 0; i < relationLabels.length; i++) {
-        const relationLabelElement = relationLabels[i];
-        // relationLabelElement.parentElement!.append('<li class="page-list-item grid-style-item"><a href="/murawaki/E3%82%AF" rel="route"><div class="hover"></div> <div class="content"> <div class="header"><div class="title">情報と価値の非中央集権ネットワーク</div> </div> <div class="description"><p>コンセプト</p> <p>本質的なものに、もっと本質的な価値を。</p> </div> </div> </a> </li>');
-      }
+      req.requestRelatedPages(linkElement.name)
+        .subscribe(links => {
+          if (links.length === 0) { return; }
+
+          const generatedLinks: string[] = links.map(link => generatePageListItem(link, req.projectName));
+
+          const lastItem = $(linkElement.labelElement).nextUntil('.splitter').last();
+          lastItem.after(generatedLinks.reduce((prev, current) => prev + current));
+        });
     });
   });
+};
+
+const generatePageListItem = function (link: Link, projectName: string): string {
+  let pageListItem = `
+    <li class="page-list-item grid-style-item .portal-link-item">
+      <a href="/${projectName}/${link.title}" rel="route">
+      <div class="hover"></div>
+      <div class="content">
+        <div class="header"><div class="title">${link.title}</div></div>`
+
+  if (link.image) {
+    pageListItem += `<div class="icon"><img src="${link.image}" class="lazy-load-img"></div>`;
+  } else {
+    pageListItem += `<div class="description">`;
+    link.descriptions.forEach(description => {
+      pageListItem += `<p>${description}</p>`;
+    });
+    pageListItem += `</div>`;
+  }
+
+  pageListItem += `
+      </div>
+      </a>
+    </li>`;
+
+  return pageListItem;
+};
+
+const getCurrentProjectName = function (): string {
+  return location.pathname.split('/')[1];
 };
