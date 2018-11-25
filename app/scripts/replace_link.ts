@@ -3,9 +3,31 @@ import { ScrapboxRequest } from './request/scrapbox_request';
 import {SBProjectNameStorageManager} from './manager/SBProjectNameStrageManager';
 import {Observable, zip} from 'rxjs';
 import {Link} from './model/link';
+import {Subject} from 'rxjs/internal/Subject';
+import {distinctUntilChanged} from 'rxjs/operators';
 
+/**
+ * グローバル変数定義
+ */
 
 const sbRequests: ScrapboxRequest[] = [];
+const pageLinkSubject: Subject<LinkElement[]> = new Subject<LinkElement[]>();
+
+
+/**
+ * インターフェース定義
+ */
+
+interface LinkElement {
+  name: string;
+  labelElement: HTMLElement;
+}
+
+
+/**
+  LifeCycle メソッド
+  Rxオブジェクトの監視
+ */
 
 $(window).on('load', function() {
   requestSBPageBySavedProjects();
@@ -17,8 +39,14 @@ $(window).on('load', function() {
     }
 
     if (e.target.className === 'grid') {
-      // appendLinkIfNeeded(e.target);
+      setLinkPageSubject(e.target);
     }
+  });
+
+  pageLinkSubject
+    .pipe(distinctUntilChanged((prev, current) => prev.length === current.length))
+    .subscribe(pageLinks => {
+    console.log('りんくへんこうされたー', pageLinks.length);
   });
 });
 
@@ -36,6 +64,14 @@ $(window).keyup(function (e) {
 $(document).mousedown(e => {
   removeCandidatePopup();
 });
+
+
+
+
+/**
+ * 関数
+ */
+
 
 const requestSBPageBySavedProjects = function () {
 
@@ -121,9 +157,23 @@ const removeCandidatePopup = function() {
   $('.portal-popup-menu').remove();
 };
 
+const setLinkPageSubject = function(gridElement: HTMLElement) {
+  const relationLabels = $(gridElement).children('.relation-label');
+  let linkElements: LinkElement[] = [];
+  for (let i = 0; i < relationLabels.length; i++) {
+    const relationLabelElement = relationLabels[i];
+    const titleElement = $(relationLabels[i]).find('.title').first();
+    const linkName = titleElement.text();
+    if (linkName !== 'New Links') {
+      linkElements.push({name: linkName, labelElement: relationLabelElement});
+    }
+  }
+
+  pageLinkSubject.next(linkElements);
+};
+
 const appendLinkIfNeeded = function (gridElement: HTMLElement) {
   const relationLabels = $(gridElement).children('.relation-label');
-
 
   const newTag = `
     <li class="page-list-item grid-style-item">
@@ -137,8 +187,6 @@ const appendLinkIfNeeded = function (gridElement: HTMLElement) {
         </div></div></a></li>`;
   //
   const relationLabelElement = relationLabels[0];
-  // relationLabelElement.parentElement!.append('<li class="page-list-item grid-style-item"><a href="/murawaki/E3%82%AF" rel="route"><div class="hover"></div> <div class="content"> <div class="header"><div class="title">情報と価値の非中央集権ネットワーク</div> </div> <div class="description"><p>コンセプト</p> <p>本質的なものに、もっと本質的な価値を。</p> </div> </div> </a> </li>');
-  console.log('relation', relationLabelElement);
   $(relationLabelElement).parent().append(newTag);
 
   let linkNames: string[] = [];
