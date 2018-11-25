@@ -1,7 +1,9 @@
 import * as $ from 'jquery';
 import { ScrapboxRequest } from './request/scrapbox_request';
 import {SBProjectNameStorageManager} from './manager/SBProjectNameStrageManager';
-import {Observable} from 'rxjs/internal/Observable';
+import {Observable, zip} from 'rxjs';
+import {Link} from './model/link';
+
 
 const sbRequests: ScrapboxRequest[] = [];
 
@@ -15,12 +17,19 @@ $(window).on('load', function() {
     }
 
     if (e.target.className === 'grid') {
-      appendLinkIfNeeded(e.target);
+      // appendLinkIfNeeded(e.target);
     }
   });
 });
 
 $(window).keyup(function (e) {
+  console.log(e.keyCode);
+
+  if (e.keyCode === 49) {
+    console.log($('.grid'));
+    appendLinkIfNeeded($('.grid')[1]);
+  }
+
   replaceEmptyLinkIfEnabled();
 });
 
@@ -115,17 +124,42 @@ const removeCandidatePopup = function() {
 const appendLinkIfNeeded = function (gridElement: HTMLElement) {
   const relationLabels = $(gridElement).children('.relation-label');
 
+
+  const newTag = `
+    <li class="page-list-item grid-style-item">
+      <a href="/murawaki/E3%82%AF" rel="route">
+      <div class="hover"></div>
+      <div class="content">
+        <div class="header"><div class="title">情報と価値の非中央集権ネットワーク</div></div>
+        <div class="description">
+        <p>コンセプト</p>
+        <p>本質的なものに、もっと本質的な価値を。</p>
+        </div></div></a></li>`;
+  //
+  const relationLabelElement = relationLabels[0];
+  // relationLabelElement.parentElement!.append('<li class="page-list-item grid-style-item"><a href="/murawaki/E3%82%AF" rel="route"><div class="hover"></div> <div class="content"> <div class="header"><div class="title">情報と価値の非中央集権ネットワーク</div> </div> <div class="description"><p>コンセプト</p> <p>本質的なものに、もっと本質的な価値を。</p> </div> </div> </a> </li>');
+  console.log('relation', relationLabelElement);
+  $(relationLabelElement).parent().append(newTag);
+
   let linkNames: string[] = [];
   for (let i = 0; i < relationLabels.length; i++) {
+    const relationLabelElement = relationLabels[i];
     const linkName = $(relationLabels[i]).find('.title').first().text();
     if (linkName !== 'New Links') {
       linkNames.push(linkName);
     }
   }
 
-  sbRequests.forEach(request => {
-    request.requestRelatedPages(linkNames[0]).subscribe(links => {
-      console.log('links', links);
+  const linkReqObservers: Observable<Link[]>[] = sbRequests.map(request => {
+    return request.requestRelatedPages(linkNames[0]);
+  });
+
+  linkReqObservers.forEach(observable => {
+    observable.subscribe((links: Link[]) => {
+      for (let i = 0; i < relationLabels.length; i++) {
+        const relationLabelElement = relationLabels[i];
+        // relationLabelElement.parentElement!.append('<li class="page-list-item grid-style-item"><a href="/murawaki/E3%82%AF" rel="route"><div class="hover"></div> <div class="content"> <div class="header"><div class="title">情報と価値の非中央集権ネットワーク</div> </div> <div class="description"><p>コンセプト</p> <p>本質的なものに、もっと本質的な価値を。</p> </div> </div> </a> </li>');
+      }
     });
   });
 };

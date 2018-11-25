@@ -30,6 +30,7 @@ export class ScrapboxRequest {
     return Observable.create(function (observer: Observer<Link[]>) {
       $.getJSON(`https://scrapbox.io/api/pages/${projectName}/${title}`, json => {
         const pageDetail = new PageDetail(json);
+
         observer.next(pageDetail.relatedPages.links1hop);
         observer.complete();
       });
