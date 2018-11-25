@@ -1,4 +1,13 @@
 // Enable chromereload by uncommenting this line:
 // import 'chromereload/devonly'
 
-console.log(`'Allo 'Allo! Popup`);
+import * as $ from 'jquery';
+
+$('#go-to-options').click(function () {
+  if (chrome.runtime.openOptionsPage) {
+    chrome.runtime.openOptionsPage();
+  } else {
+    window.open(chrome.runtime.getURL('options.html'));
+  }
+});
+
