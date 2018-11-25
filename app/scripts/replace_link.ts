@@ -35,11 +35,7 @@ $(window).on('load', function() {
   $('#app-container').on('DOMSubtreeModified propertychange', function(e) {
     // linesが変更された時にリンクを更新する
     if (e.target.className === 'lines') {
-      replaceEmptyLinkIfEnabled();
-    }
-
-    if (e.target.className === 'grid') {
-      setLinkPageSubject(e.target);
+      updatePortalLinks();
     }
   });
 
@@ -52,14 +48,9 @@ $(window).on('load', function() {
 });
 
 $(window).keyup(function (e) {
-  console.log(e.keyCode);
-  if (e.keyCode === 49) {
-    console.log('さくじょ０', $('.portal-link-item'));
-    $('.portal-link-item').remove();
-  }
+  // console.log(e.keyCode); // 49
 
-
-  replaceEmptyLinkIfEnabled();
+  updatePortalLinks();
 });
 
 $(document).mousedown(e => {
@@ -72,18 +63,36 @@ $(document).mousedown(e => {
  * 関数
  */
 
+const updatePortalLinks = function() {
+  replaceEmptyLinkIfEnabled();
+  setLinkPageSubject($('.grid')[1]);
+};
 
 const requestSBPageBySavedProjects = function () {
 
   SBProjectNameStorageManager.getProjectNames(function (projectNames: string[]) {
 
-    projectNames.forEach(function (name: string) {
-      const scbRequest = new ScrapboxRequest(name, function () {
-        replaceEmptyLinkIfEnabled();
+    // projectNames.forEach(function (name: string) {
+      // const scbRequest = new ScrapboxRequest(name, function () {
+      //   replaceEmptyLinkIfEnabled();
+      // });
+      //
+      // sbRequests.push(scbRequest);
+    // });
+
+    for (let i = 0; i < projectNames.length; i++) {
+      const scbRequest = new ScrapboxRequest(projectNames[i], function () {
+        // replaceEmptyLinkIfEnabled();
+
+        if (i === projectNames.length - 1) {
+          console.log('ogefefefe');
+          updatePortalLinks();
+        }
       });
 
       sbRequests.push(scbRequest);
-    });
+    }
+
   });
 };
 
@@ -213,6 +222,7 @@ const generatePageListItem = function (link: Link, projectName: string): string 
   }
 
   pageListItem += `
+      <div class="project-name"><span>${projectName}</span></div>
       </div>
       </a>
     </li>`;
