@@ -14,6 +14,7 @@ export class Link {
     this.id = 'id' in data ? data.id : '';
     this.title = 'title' in data ? data.title : '';
     this.titleLc = 'titleLc' in data ? data.titleLc : '';
+    this.image = 'image' in data ? data.image : '';
     this.descriptions = 'descriptions' in data ? data.descriptions : [];
     this.linksLc = 'linksLc' in data ? data.linksLc : [];
     this.updated = 'updated' in data ? data.updated : 0;
