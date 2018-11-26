@@ -5,6 +5,7 @@ import {Observable, zip} from 'rxjs';
 import {Link} from './model/link';
 import {Subject} from 'rxjs/internal/Subject';
 import {distinctUntilChanged, skip, take, throttle, throttleTime} from 'rxjs/operators';
+import {generate} from 'rxjs/internal/observable/generate';
 
 /**
  * グローバル変数定義
@@ -210,13 +211,16 @@ const appendLinkIfNeeded = function (linkElements: LinkElement[]) {
   $('.portal-link-item').remove();
 
   linkElements.forEach(linkElement => {
-    // if (linkElement.name === 'Links') { return; }
-
     sbRequests.forEach(req => {
       if (req.projectName === getCurrentProjectName()) { return; }
 
       if (linkElement.labelElement.innerText === 'Links\n') {
-
+        const link = req.pageToLink(linkElement.name);
+        if (link) {
+          const generatedLink: string = generatePageListItem(link, req.projectName);
+          const lastItem = $(linkElement.labelElement).nextUntil('.splitter').last();
+          lastItem.after(generatedLink);
+        }
       } else {
         req.requestRelatedPages(linkElement.name)
           .subscribe(links => {
