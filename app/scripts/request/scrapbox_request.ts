@@ -24,6 +24,20 @@ export class ScrapboxRequest {
     });
   }
 
+  public pageToLink(title: string): Link | null {
+    const page = this.pageList.pages.find(page => page.title === title);
+    if (page) {
+      return new Link({
+        title: page.title,
+        image: page.image,
+        descriptions: page.descriptions
+      });
+    }
+
+    return null;
+  }
+
+
   public requestRelatedPages(title: string): Observable<Link[]> {
     const projectName = this.projectName;
 

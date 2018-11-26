@@ -23,6 +23,10 @@ interface LinkElement {
   labelElement: HTMLElement;
 }
 
+const initLinkElement = function(name: string, labelElement: HTMLElement): LinkElement {
+  return {name: name, labelElement: labelElement};
+};
+
 
 /**
   LifeCycle メソッド
@@ -180,14 +184,22 @@ const removeCandidatePopup = function() {
 };
 
 const setLinkPageSubject = function(gridElement: HTMLElement) {
+
+  const portalLinks = $('.portal-page-link');
+
   const relationLabels = $(gridElement).children('.relation-label');
   let linkElements: LinkElement[] = [];
   for (let i = 0; i < relationLabels.length; i++) {
     const relationLabelElement = relationLabels[i];
     const titleElement = $(relationLabels[i]).find('.title').first();
     const linkName = titleElement.text();
-    if (linkName !== 'New Links') {
-      linkElements.push({name: linkName, labelElement: relationLabelElement});
+
+    if (linkName === 'Links') {
+      for (let i = 0; i < portalLinks.length; i++) {
+        linkElements.push(initLinkElement(portalLinks[i].innerText, relationLabelElement));
+      }
+    } else if (linkName !== 'New Links') {
+      linkElements.push(initLinkElement(linkName, relationLabelElement));
     }
   }
 
@@ -198,20 +210,24 @@ const appendLinkIfNeeded = function (linkElements: LinkElement[]) {
   $('.portal-link-item').remove();
 
   linkElements.forEach(linkElement => {
-    if (linkElement.name === 'Links') { return; }
+    // if (linkElement.name === 'Links') { return; }
 
     sbRequests.forEach(req => {
       if (req.projectName === getCurrentProjectName()) { return; }
 
-      req.requestRelatedPages(linkElement.name)
-        .subscribe(links => {
-          if (links.length === 0) { return; }
+      if (linkElement.labelElement.innerText === 'Links\n') {
 
-          const generatedLinks: string[] = links.map(link => generatePageListItem(link, req.projectName));
+      } else {
+        req.requestRelatedPages(linkElement.name)
+          .subscribe(links => {
+            if (links.length === 0) { return; }
 
-          const lastItem = $(linkElement.labelElement).nextUntil('.splitter').last();
-          lastItem.after(generatedLinks.reduce((prev, current) => prev + current));
-        });
+            const generatedLinks: string[] = links.map(link => generatePageListItem(link, req.projectName));
+
+            const lastItem = $(linkElement.labelElement).nextUntil('.splitter').last();
+            lastItem.after(generatedLinks.reduce((prev, current) => prev + current));
+          });
+      }
     });
   });
 };

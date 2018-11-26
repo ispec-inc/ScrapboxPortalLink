@@ -4,6 +4,7 @@ export class Page {
   id: string;
   title: string;
   image: string;
+  descriptions: string[];
   user: string;
   pin: number;
   views: number;
@@ -17,6 +18,7 @@ export class Page {
     this.id = 'id' in data ? data.id : '';
     this.title = 'title' in data ? data.title : '';
     this.image = 'image' in data ? data.image : '';
+    this.descriptions = 'descriptions' in data ? data.descriptions : [];
     this.user = 'user' in data ? data.user : '';
     this.pin = 'pin' in data ? data.pin : 0;
     this.views = 'views' in data ? data.views : 0;

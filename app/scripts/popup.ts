@@ -10,4 +10,3 @@ $('#go-to-options').click(function () {
     window.open(chrome.runtime.getURL('options.html'));
   }
 });
-
