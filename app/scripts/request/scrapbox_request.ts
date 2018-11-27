@@ -27,8 +27,6 @@ export class ScrapboxRequest {
   public pageToLink(title: string): Link | null {
     const page = this.pageList.pages.find(page => page.title === title);
 
-    console.log('link = ', page);
-
     if (page) {
       return new Link({
         title: page.title,

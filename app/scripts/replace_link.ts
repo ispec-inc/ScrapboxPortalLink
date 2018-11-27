@@ -46,7 +46,7 @@ $(window).on('load', function() {
 
   pageLinkSubject
     .pipe(distinctUntilChanged((prev, current) => prev.length === current.length))
-    .pipe(throttleTime(5000))
+    // .pipe(throttleTime(5000))
     .subscribe(pageLinks => {
       appendLinkIfNeeded(pageLinks);
     });
@@ -80,6 +80,9 @@ const updatePortalLinksIfReactDrawDone = function() {
 
 const updatePortalLinks = function() {
   replaceEmptyLinkIfEnabled();
+
+  
+
   setLinkPageSubject($('.grid')[1]);
 };
 
@@ -88,15 +91,6 @@ const requestSBPageBySavedProjects = function () {
   const completeReqSubject: Subject<void> = new Subject<void>();
 
   SBProjectNameStorageManager.getProjectNames(function (projectNames: string[]) {
-
-    // projectNames.forEach(function (name: string) {
-      // const scbRequest = new ScrapboxRequest(name, function () {
-      //   replaceEmptyLinkIfEnabled();
-      // });
-      //
-      // sbRequests.push(scbRequest);
-    // });
-
     for (let i = 0; i < projectNames.length; i++) {
       const scbRequest = new ScrapboxRequest(projectNames[i], function () {
         completeReqSubject.next();
@@ -204,10 +198,15 @@ const setLinkPageSubject = function(gridElement: HTMLElement) {
     }
   }
 
+  const links = linkElements.map(link => link.name);
+  console.log('hogehoge ->>>>>>> ', links);
+
   pageLinkSubject.next(linkElements);
 };
 
 const appendLinkIfNeeded = function (linkElements: LinkElement[]) {
+  console.log('実際にコールされている');
+
   $('.portal-link-item').remove();
 
   linkElements.forEach(linkElement => {

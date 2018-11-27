@@ -53,7 +53,7 @@
     "require-dir": "0.x.x",
     "standard": "^10.0.2",
     "ts-loader": "^2.x.x",
-    "tslint": "^5.x.x",
+    "tslint": "^5.11.0",
     "typescript": "^3.1.6",
     "vinyl-named": "1.x.x",
     "webpack": "3.x.x",
